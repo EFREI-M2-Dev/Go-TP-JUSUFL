@@ -27,3 +27,4 @@ Créer un annuaire :
 - `go run . --action update --name "Francis Huster" --newName "Marc Lavoine" --number "118218"`
 - `go run . --action search --name "Francis Huster"`
 - `go run . --action delete --name "Francis Huster"`
+- `go test -v`
