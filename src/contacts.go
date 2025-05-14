@@ -30,19 +30,19 @@ func loadPhonebook() (PhoneBook, error) {
 	return a, err
 }
 
-func displayContacts() {
+func displayContacts() string {
 	phoneBook, err := loadPhonebook()
 	if err != nil {
-		fmt.Println("Error :", err)
-		return
+		return fmt.Sprintf("Error: %v\n", err)
 	}
 	if len(phoneBook.Contacts) == 0 {
-		fmt.Println("Phonebook is empty.")
-		return
+		return "Contacts list is empty."
 	}
+	var result string
 	for _, c := range phoneBook.Contacts {
-		fmt.Printf("Nom: %s, Téléphone: %s\n", c.Name, c.Number)
+		result += fmt.Sprintf("Nom: %s, Téléphone: %s\n", c.Name, c.Number)
 	}
+	return result
 }
 
 func savePhonebook(phonebook PhoneBook) error {
