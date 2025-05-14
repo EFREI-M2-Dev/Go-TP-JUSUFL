@@ -44,3 +44,11 @@ func displayContacts() {
 		fmt.Printf("Nom: %s, Téléphone: %s\n", c.Name, c.Number)
 	}
 }
+
+func savePhonebook(phonebook PhoneBook) error {
+	data, err := json.MarshalIndent(phonebook, "", "  ")
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(storageFile, data, 0644)
+}
