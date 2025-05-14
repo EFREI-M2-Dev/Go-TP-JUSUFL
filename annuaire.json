@@ -1,0 +1,16 @@
+{
+  "contacts": [
+    {
+      "nom": "Francis Huster",
+      "tel": "0102030405"
+    },
+    {
+      "nom": "Bob L'éponge",
+      "tel": "0607080910"
+    },
+    {
+      "nom": "Marc Lavoine",
+      "tel": "0811223344"
+    }
+  ]
+}
