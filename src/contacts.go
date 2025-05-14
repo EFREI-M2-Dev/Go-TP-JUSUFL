@@ -7,18 +7,18 @@ import (
 )
 
 type Contact struct {
-	Nom string `json:"nom"`
-	Tel string `json:"tel"`
+	Name   string `json:"nom"`
+	Number string `json:"tel"`
 }
 
-type Annuaire struct {
+type PhoneBook struct {
 	Contacts []Contact `json:"contacts"`
 }
 
 const storageFile = "annuaire.json"
 
-func chargerAnnuaire() (Annuaire, error) {
-	var a Annuaire
+func loadPhonebook() (PhoneBook, error) {
+	var a PhoneBook
 	data, err := os.ReadFile(storageFile)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -30,17 +30,17 @@ func chargerAnnuaire() (Annuaire, error) {
 	return a, err
 }
 
-func listerContacts() {
-	annuaire, err := chargerAnnuaire()
+func displayContacts() {
+	phoneBook, err := loadPhonebook()
 	if err != nil {
-		fmt.Println("Erreur de chargement :", err)
+		fmt.Println("Error :", err)
 		return
 	}
-	if len(annuaire.Contacts) == 0 {
-		fmt.Println("Annuaire vide")
+	if len(phoneBook.Contacts) == 0 {
+		fmt.Println("Phonebook is empty.")
 		return
 	}
-	for _, c := range annuaire.Contacts {
-		fmt.Printf("Nom: %s, Téléphone: %s\n", c.Nom, c.Tel)
+	for _, c := range phoneBook.Contacts {
+		fmt.Printf("Nom: %s, Téléphone: %s\n", c.Name, c.Number)
 	}
 }
