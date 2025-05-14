@@ -53,6 +53,23 @@ func savePhonebook(phonebook PhoneBook) error {
 	return os.WriteFile(storageFile, data, 0644)
 }
 
+func updateContact(name, newName, newNumber string) error {
+	phonebook, err := loadPhonebook()
+	if err != nil {
+		return err
+	}
+
+	for i, c := range phonebook.Contacts {
+		if c.Name == name {
+			phonebook.Contacts[i].Name = newName
+			phonebook.Contacts[i].Number = newNumber
+			return savePhonebook(phonebook)
+		}
+	}
+	
+	return fmt.Errorf("contact not found")
+}
+
 func deleteContact(name string) error {
 	phonebook, err := loadPhonebook()
 	if err != nil {
