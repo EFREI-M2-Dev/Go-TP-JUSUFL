@@ -1,5 +1,32 @@
 package main
 
+import (
+	"flag"
+	"fmt"
+)
+
 func main() {
-	displayContacts()
+	action := flag.String("action", "", "Action to perform: add, list, update, delete")
+	flag.Parse()
+
+	annuaire, err := loadPhonebook()
+	if err != nil {
+		fmt.Println("Error during loading :", err)
+		return
+	}
+
+	switch *action {
+		case "add":
+			fmt.Printf("add contact")
+		case "list":
+			for _, contact := range annuaire.Contacts {
+				fmt.Printf("%+v\n", contact)
+			}
+		case "update":
+			fmt.Printf("update contact")
+		case "delete":
+			fmt.Printf("delete contact")
+		default:
+			fmt.Println("Action inconnue")
+	}
 }
