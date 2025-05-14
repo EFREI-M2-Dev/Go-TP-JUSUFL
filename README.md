@@ -8,11 +8,11 @@ Membres du groupe :
 
 ## Consignes
 Créer un annuaire :
-- au minimum “nom prénom” + “numéro de téléphone”
+- Au minimum “nom prénom” + “numéro de téléphone”
 - Lister
-- ajouter un contact
-- supprimer
-- modifier
+- Ajouter un contact
+- Supprimer
+- Modifier
 - Vérifier si une personne avec le même nom existe déjà
 - Test unitaires obligatoires
 
