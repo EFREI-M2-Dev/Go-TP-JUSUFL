@@ -53,6 +53,33 @@ func savePhonebook(phonebook PhoneBook) error {
 	return os.WriteFile(storageFile, data, 0644)
 }
 
+func addContact(name, number string) error {
+	phonebook, err := loadPhonebook()
+	if err != nil {
+		return fmt.Errorf("error while loading phonebook: %w", err)
+	}
+
+	for _, c := range phonebook.Contacts {
+		if c.Name == name {
+			return fmt.Errorf("le contact '%s' existe déjà", name)
+		}
+	}
+
+	newContact := Contact{
+		Name:   name,
+		Number: number,
+	}
+
+	phonebook.Contacts = append(phonebook.Contacts, newContact)
+
+	err = savePhonebook(phonebook)
+	if err != nil {
+		return fmt.Errorf("error while saving phonebook: %w", err)
+	}
+
+	return nil
+}
+
 func updateContact(name, newName, newNumber string) error {
 	phonebook, err := loadPhonebook()
 	if err != nil {

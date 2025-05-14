@@ -20,7 +20,18 @@ func main() {
 
 	switch *action {
 	case "add":
-		fmt.Printf("add contact")
+		fmt.Printf("-- Ajout d’un contact --\n")
+		if *name == "" || *number == "" {
+			fmt.Println("Veuillez fournir un nom et un numéro (--name et --number).")
+			return
+		}
+
+		err := addContact(*name, *number)
+		if err != nil {
+			fmt.Println("Erreur lors de l’ajout :", err)
+			return
+		}
+		fmt.Printf("Contact ajouté : %s (%s)\n", *name, *number)
 	case "list":
 		fmt.Printf("-- Liste des contacts -- \n")
 		displayContacts()
