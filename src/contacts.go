@@ -52,3 +52,25 @@ func savePhonebook(phonebook PhoneBook) error {
 	}
 	return os.WriteFile(storageFile, data, 0644)
 }
+
+func deleteContact(name string) error {
+	phonebook, err := loadPhonebook()
+	if err != nil {
+		return err
+	}
+
+	found := false
+	for i, c := range phonebook.Contacts {
+		if c.Name == name {
+			phonebook.Contacts = append(phonebook.Contacts[:i], phonebook.Contacts[i+1:]...)
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		return fmt.Errorf("le contact '%s' n'existe pas", name)
+	}
+
+	return savePhonebook(phonebook)
+}
