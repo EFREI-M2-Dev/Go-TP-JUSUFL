@@ -1,13 +1,17 @@
 # TP-1 - GoLang
 
 ## Description
-Membres du groupe : 
+
+Membres du groupe :
+
 - Julien CHAZAL
 - Louis LUBINEAU
 - Florent PARIS
 
 ## Consignes
+
 Créer un annuaire :
+
 - Au minimum “nom prénom” + “numéro de téléphone”
 - Lister
 - Ajouter un contact
@@ -17,9 +21,9 @@ Créer un annuaire :
 - Test unitaires obligatoires
 
 ## Commandes
-- `go run main.go --action add --name "Alice" --tel "0123456789"`
-- `go run main.go --action delete --name "Alice"`
-- `go run main.go --action edit --name "Alice" --tel "0987654321"`
-- `go run main.go --action search --name "Alice"`
-- `go run main.go --action list`
-- `go run main.go --action search --name "Bob"`
+
+- `go run . --action list`
+- `go run . --action add --name "Francis Huster" --number "0123456789"`
+- `go run . --action update --name "Francis Huster" --newName "Marc Lavoine" --number "118218"`
+- `go run . --action search --name "Francis Huster"`
+- `go run . --action delete --name "Francis Huster"`
