@@ -66,28 +66,43 @@ func updateContact(name, newName, newNumber string) error {
 			return savePhonebook(phonebook)
 		}
 	}
-	
+
 	return fmt.Errorf("contact not found")
 }
 
+func searchContact(name string) (*Contact, error) {
+	phonebook, err := loadPhonebook()
+	if err != nil {
+		return nil, err
+	}
+
+	for _, c := range phonebook.Contacts {
+		if c.Name == name {
+			return &c, err
+		}
+	}
+
+	return nil, fmt.Errorf("le contact '%s' n'existe pas", name)
+}
+
 func deleteContact(name string) error {
+	_, err := searchContact(name)
+	if err != nil {
+		return err
+	}
+
 	phonebook, err := loadPhonebook()
 	if err != nil {
 		return err
 	}
 
-	found := false
-	for i, c := range phonebook.Contacts {
-		if c.Name == name {
-			phonebook.Contacts = append(phonebook.Contacts[:i], phonebook.Contacts[i+1:]...)
-			found = true
-			break
+	newContacts := make([]Contact, 0, len(phonebook.Contacts))
+	for _, c := range phonebook.Contacts {
+		if c.Name != name {
+			newContacts = append(newContacts, c)
 		}
 	}
 
-	if !found {
-		return fmt.Errorf("le contact '%s' n'existe pas", name)
-	}
-
+	phonebook.Contacts = newContacts
 	return savePhonebook(phonebook)
 }
