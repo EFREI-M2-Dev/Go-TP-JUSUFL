@@ -81,6 +81,11 @@ func addContact(name, number string) error {
 }
 
 func updateContact(name, newName, newNumber string) error {
+	_, err := searchContact(name)
+	if err != nil {
+		return err
+	}
+
 	phonebook, err := loadPhonebook()
 	if err != nil {
 		return err
